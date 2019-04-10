@@ -1,15 +1,72 @@
 <html>
   <head>
-    
+    <style>
+      body{
+        margin: auto;
+        padding: 0;
+        background-image: url('gameBackground.jpg');
+        background-size: cover;
+      }
+      h1{
+        color: rgb(243, 194, 61);
+        text-align: center;
+        font-size: 10vh;
+        font-family: Comic Sans MS, Comic Sans, cursive;
+        text-shadow: 4px 4px rgba(255, 251, 212, 0.473);
+      }
+      h3{
+        margin-top: 3px;
+        text-align: center;
+        font-size: 3vh;
+        font-family: Comic Sans MS, Comic Sans, cursive;
+        margin-bottom: 10px;
+        color:  rgb(65, 55, 10);
+      }
+      p{
+        font-size: 2.25vh;
+        color:  rgb(65, 55, 10);
+        text-align: center;
+        word-break: break-word;
+        font-family: Comic Sans MS, Comic Sans, cursive;      
+        margin: 10px;
+      }
+      #storyInfo{
+        width: 50vw;
+        height: 53vh;
+        background: rgba(255, 240, 110, 0.85);
+        float: left;
+        margin-top: -3.5vh;
+        margin-left: 25vw; 
+        border-style: solid;
+        border-color: rgb(255, 187, 41);
+        border-width: 2px 2px 2px 2px;
+      }
+    </style>
   </head>
-  <body>
+  <body onkeydown = "nextPage()">
+      <h1>Devoid of Demonetization</h1>
+      <div id="storyInfo">
+      <h3>Background:</h3>
+      <p>Your dream has always been to be a successful famous YouTuber. Although you're given the opportunity as your parents support you, the YouTube algorithm makes it difficult for you to achieve your dream.</p>
+      <h3>How To Play:</h3>
+      <p>You are the YouTube symbol on the left side of the screen.</p> 
+      <p>Your objective is to make YouTube videos and to do so you must avoid the Demonetization blocks coming to you on the right side of the screen.</p> 
+      <p>Use the space bar to jump up.</p> 
+      <p>Use the "A" key to move left. Use the "D" key to move right.</p>
+      <p>You lose as soon as you hit the Demonetization blocks and get 1 point per Demonetization block dodged.</p>
+      <p>Press The Enter Key To Start</p>
+      <!--<button onclick ="startGame()" id="sendHelp" >Play</button>-->
+    </div>
     <script>
+      function nextPage(){
+        var key = event.keyCode;
+        if (key === 13) {
+          startGame();
+        }
+      }
       function startGame(){
         location.href = "gravityGame.html";
       }
     </script>
-    <div id="gameMenu">
-    <button onclick ="startGame()">Play</button>
-    </div>
   </body>
 </html>
