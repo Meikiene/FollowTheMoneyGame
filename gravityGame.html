@@ -6,12 +6,16 @@
     <script src="platform.js"></script>
     <script src="p5/p5.collide2d.min.js"></script>
     <script src="p5/addons/p5.dom.min.js"></script>
+    <script src="p5/addons/p5.sound.min.js"></script>
     <script language="javascript" type="text/javascript" src="p5/addons/p5.dom.js"></script>
     <style>
       body{
+        z-index: -1;
         margin: 0;
         padding: 0;
         overflow: hidden;
+        background-image: url("gameBackground.jpg");
+        background-size: cover;
       }
       #scoreID{
         color:white;
@@ -76,20 +80,33 @@
     var loser;
     var pushButton;
     var goBack;
-    var backGround;
+    //var backGround;
+    var gameChar; 
+    var badGuy;
+    var groundImg;
+    var qualityMusic;
+    var deathSound;
       function preload(){
-        backGround = loadImage("gameBackground.jpg");
-        backGround.resize(w,h);
+        //backGround = loadImage("gameBackground.jpg");
+        //backGround.resize(w,h);
+        gameChar = loadImage("characterImg.png");
+        badGuy = loadImage("evilGuy.png");
+        //groundImg = loadImage("groundFloor.jpg")
+        qualityMusic = loadSound("bestMusic.mp3");
+        deathSound = loadSound("gameOver.mp3");
       }
       function setup(){
         createCanvas(w,h);
         scoreDiv = createDiv("Your Score: " + score);
         scoreDiv.id("scoreID");
         scoreDiv.position(0,0);
+        qualityMusic.play();
       }
       
       function draw(){
-        background(backGround);
+        clear();
+        //imageMode(CORNER);
+        //background(backGround);
         jumper.show();
         jumper.update();
         barrier.show();
@@ -98,11 +115,11 @@
         barrier2.update();
         barrier3.show();
         barrier3.update();
-        platform.show();
-        hit = collideRectCircle(barrier.x,barrier.y,barrier.width,barrier.height,jumper.x,jumper.y,50);
-        hit2 = collideRectCircle(barrier2.x,barrier2.y,barrier2.width,barrier2.height,jumper.x,jumper.y,50);
-        hit3 = collideRectCircle(barrier3.x,barrier3.y,barrier3.width,barrier3.height,jumper.x,jumper.y,50);
-        hit4 = collideRectCircle(platform.x,platform.y,platform.width,platform.height,jumper.x,jumper.y,50);
+        //platform.show();
+        hit = collideCircleCircle(barrier.x,barrier.y,80,jumper.x,jumper.y,80);
+        hit2 = collideCircleCircle(barrier2.x,barrier2.y,80,jumper.x,jumper.y,80);
+        hit3 = collideCircleCircle(barrier3.x,barrier3.y,80,jumper.x,jumper.y,80);
+        //hit4 = collideRectCircle(platform.x,platform.y,platform.width,platform.height,jumper.x,jumper.y,100);
         if ((hit == true) || (hit2 == true) || (hit3 == true)){
           //window.alert("You lose!");
           noLoop();
@@ -117,6 +134,8 @@
           goBack.id("button2");
           goBack.position(w*0.43,h*0.60901);
           goBack.mousePressed(goHome);
+          qualityMusic.stop();
+          deathSound.play();
           console.log("hit detected! im depresso");
           
         }
@@ -124,11 +143,11 @@
           score += 1;
           document.getElementById("scoreID").innerHTML ="Your Score: " + score;
         }*/
-        if (hit4 == true){
-          jumper.velocity = -10;
+        //if (hit4 == true){
+          //jumper.velocity = -10;
           //score += 1;
           //document.getElementById("scoreID").innerHTML ="Your Score: " + score;
-        }
+       // }
         function tryAgain(){
           window.location.reload();
         }

@@ -1,13 +1,15 @@
 function jumper() {
         this.x = 50;
         this.y = 0;
-        this.gravity = 0.5; //the force of gravity
-        this.lift = -10; //opposing force
-        this.velocity = 0; //speed of the gravity
+        this.gravity = 0.8; //the force of gravity
+        this.lift = -20; //opposing force
+        this.velocity = 1; //speed of the gravity
         
         this.show = function(){
-          fill(color('red'));
-          ellipse(this.x,this.y,50,50);
+          imageMode(CENTER);
+          image(gameChar,this.x,this.y,100,100);
+          //fill(color('red'));
+          //ellipse(this.x,this.y,75,75);
         }
         this.up = function(){
           this.velocity += this.lift;
@@ -16,12 +18,12 @@ function jumper() {
           this.velocity += this.gravity;
           this.y += this.velocity;
           this.velocity *= 0.9;
-          if (this.y > h) { //stop on floor
-            this.y = h;
+          if (this.y > h-50) { //stop on floor
+            this.y = h-50;
             this.velocity = -10;
           }
-          if (this.y < 0) { //stop on ceiling.
-            this.y = 0;
+          if (this.y < 50) { //stop on ceiling.
+            this.y = 50;
             this.velocity = 0;
           }
           if ((keyIsDown(65)) && (this.x > 0)){
